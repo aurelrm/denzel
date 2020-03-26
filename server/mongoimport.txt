@@ -1,0 +1,1 @@
+mongoimport  --host  thecluster-shard-00-02-tygpr.gcp.mongodb.net:27017 --ssl --username aurelrm  --password aurelrm  --authenticationDatabase admin  --db movies   --collection denzel --jsonArray  --file movies.json
