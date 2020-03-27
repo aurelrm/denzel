@@ -2,7 +2,7 @@ const Express = require("express");
 const BodyParser = require("body-parser");
 var MongoClient = require("mongodb").MongoClient;
 const graphqlHTTP = require('express-graphql');
-
+const ObjectId = require("mongodb").ObjectID;
 const {GraphQLSchema} = require('graphql');
 const CONNECTION_URL = "mongodb+srv://aurelrm:aurelrm@thecluster-tygpr.gcp.mongodb.net/test?retryWrites=true&w=majority";
 const {queryType} = require('./query.js')
@@ -17,7 +17,7 @@ app.use(BodyParser.urlencoded({ extended: true }));
 
 var database, collection;
 
-app.listen(3000, () => {
+app.listen(9292, () => {
     
     MongoClient.connect(CONNECTION_URL,{ useNewUrlParser: true }, (error, client) => {
         if(error) {
@@ -39,8 +39,8 @@ app.get("/movies/populate", (request, response) => {
         response.send(result);
     });
 });
-app.get("/movie", (request, response) => {
-    collection.findOne({"metascore" : {"$gt" : 70}}, (error, result) => {
+app.get("/movies", (request, response) => {
+    collection.findOne( (error, result) => {
         if(error) {
             return response.status(500).send(error);
         }
